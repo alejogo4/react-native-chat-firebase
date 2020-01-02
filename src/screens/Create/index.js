@@ -1,36 +1,27 @@
 import React, { Component } from "react";
 import { Container, Content, Button, Icon, Text, ListItem, List, Left, Right } from 'native-base';
-import { FlatList,View,ActivityIndicator, StatusBar} from 'react-native';
+import { FlatList,View,ActivityIndicator  } from 'react-native';
 
 import { connect } from 'react-redux';
-import { getPosts } from './../../redux/actions/posts';
 
 
-class Home extends Component {
+class Create extends Component {
 
     componentDidMount() {
-        this.getPosts();
+    
     }
 
-    getPosts() {
-        this.props.getAllPosts();
-    }
+   
 
 
     render() {
-        const navigate = this.props.navigation;
         return (
+
             <Container>
-                <StatusBar backgroundColor="red" barStyle="light-content" />
                 <Content>
-                    <Button onPress={() => navigate.openDrawer()} info>
+                    <Button onPress={() => this.props.navigation.openDrawer()} info>
                         <Icon name="ios-arrow-back" />
                     </Button>
-
-                    <Button
-                    transparent
-                    onPress={() => navigate.navigate('Create')}
-                  ><Text>Hola</Text></Button>
                     {
                         this.props.loading ? 
                         <View>
@@ -67,10 +58,5 @@ const mapStateProps = state => {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getAllPosts: () => dispatch(getPosts())
-    }
-}
-
-export default connect(mapStateProps, mapDispatchToProps)(Home);
+const mapDispatchToProps = dispatch => {return{}}
+export default connect(mapStateProps, mapDispatchToProps)(Create);

@@ -11,6 +11,7 @@ import { createDrawerNavigator, DrawerItems } from "react-navigation-drawer";
 import NavigationService from "./src/services/NavigationService";
 
 import Home from "./src/screens/Home";
+import Create from "./src/screens/Create";
 
 import { Provider } from 'react-redux';
 import {store} from './src/redux/store';
@@ -34,7 +35,8 @@ const CustomDrawerComponent = props => (
 
 const Drawer = createDrawerNavigator(
   {
-    Home: Home
+    Home: Home,
+    Create : Create
   },
   {
     contentComponent: CustomDrawerComponent
@@ -43,7 +45,8 @@ const Drawer = createDrawerNavigator(
 
 const stackNavigation = createStackNavigator(
   {
-    Home: Home
+    Home: Home,
+    Create : Create
   },
 
   {
