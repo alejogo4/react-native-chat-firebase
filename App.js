@@ -11,6 +11,10 @@ import { createDrawerNavigator, DrawerItems } from "react-navigation-drawer";
 import NavigationService from "./src/services/NavigationService";
 
 import Home from "./src/screens/Home";
+import Chat from "./src/screens/Chat";
+import Login from "./src/screens/Login";
+import Register from './src/screens/Register';
+
 
 import { Provider } from 'react-redux';
 import {store} from './src/redux/store';
@@ -34,7 +38,10 @@ const CustomDrawerComponent = props => (
 
 const Drawer = createDrawerNavigator(
   {
-    Home: Home
+    Login: Login,
+    Register:Register,
+    Home: Home,
+    Chat:Chat
   },
   {
     contentComponent: CustomDrawerComponent
@@ -43,7 +50,10 @@ const Drawer = createDrawerNavigator(
 
 const stackNavigation = createStackNavigator(
   {
-    Home: Home
+    Login: Login,
+    Register:Register,
+    Home: Home,
+    Chat:Chat
   },
 
   {

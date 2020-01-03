@@ -25,6 +25,11 @@ class Login extends Component {
                     <Button onPress={() => this.props.navigation.openDrawer()} info>
                         <Icon name="ios-arrow-back" />
                     </Button>
+
+                    <Button onPress={() => this.props.navigation.navigate('Chat')}>
+                        <Text>Chat</Text>
+                    </Button>
+
                     {
                         this.props.loading ? 
                         <View>
