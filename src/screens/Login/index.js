@@ -16,6 +16,7 @@ export default class Login extends Component {
     };
 
     onPressLogin = async () => {
+        console.log("Click Login");
         const user = {
             name: this.state.name,
             email: this.state.email,

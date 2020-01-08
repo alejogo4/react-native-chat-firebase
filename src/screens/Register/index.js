@@ -9,39 +9,35 @@ export default class Login extends Component {
     };
 
     state = {
-        name: 'Alice',
-        email: 'test@live.com',
-        password: '123456',
+        name: '',
+        email: '',
+        password: '',
         avatar: ''
     };
 
-    onPressLogin = async () => {
-        const user = {
-            name: this.state.name,
-            email: this.state.email,
-            password: this.state.password,
-            avatar: this.state.avatar
-        };
+    clearForm(){
+        this.setState({
+            name:'',
+            email : '',
+            password : ''
+        })
+    }
 
-        const response = firebaseSDK.login(
-            user,
-            this.loginSuccess,
-            this.loginFailed
-        );
-    };
+    onPressCreate =async()=>{
+        try {
+            const user ={
+                name : this.state.name,
+                email : this.state.email,
+                password : this.state.password
+            }
 
-    loginSuccess = () => {
-        console.log('login successful, navigate to chat.');
-        this.props.navigation.navigate('Chat', {
-            name: this.state.name,
-            email: this.state.email,
-            avatar: this.state.avatar
-        });
-    };
-
-    loginFailed = () => {
-        alert('Error al entrar, usuarios incorrectos');
-    };
+            await firebaseSDK.createAccount(user);
+            this.clearForm();
+            
+        } catch (error) {
+            
+        }
+    }
 
 
 
@@ -61,9 +57,12 @@ export default class Login extends Component {
                                 <Icon active name="lock" style={{ color: "gray" }} />
                                 <Input autoCapitalize="none" value={this.state.password} onChangeText={(password) => { this.setState({ password }) }} placeholder="Contraseña" placeholderTextColor="gray" />
                             </Item>
-
-                            <Button iconRight rounded block success style={styles.my_s} onPress={this.onPressLogin}>
-                                <Text>Ingresar</Text>
+                            <Item rounded style={styles.my_s}>
+                                <Icon active name="person" style={{ color: "gray" }} />
+                                <Input autoCapitalize="none" value={this.state.name} onChangeText={(name) => { this.setState({ name }) }} placeholder="Usuario" placeholderTextColor="gray" />
+                            </Item>
+                            <Button iconRight rounded block success style={styles.my_s} onPress={this.onPressCreate}>
+                                <Text>Create</Text>
                                 <Icon name='arrow-forward' />
                             </Button>
                         </Form>

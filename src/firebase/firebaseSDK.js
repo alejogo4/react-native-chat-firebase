@@ -1,4 +1,6 @@
-import firebase from 'firebase';
+import * as firebase from 'firebase';
+import 'firebase/firestore';;
+
 
 class FirebaseSDK {
     constructor() {
@@ -95,6 +97,48 @@ class FirebaseSDK {
             alert('Unable to update avatar. You must login first.');
         }
     };
+
+    uid = async () => {
+        var uuid = ""
+        var auth = await firebase.auth()
+        await auth.onAuthStateChanged((user) => {
+            uuid = user.uid;
+        });
+
+        return uuid;
+    }
+
+    send = async (data) => {
+        var app = firebase;
+        var db = firebase.firestore(app);
+        await db.collection("messages").add(data)
+            .then(function (docRef) {
+
+            }).catch(function (error) {
+
+            });
+    }
+
+    getData = async () => {
+        let messages = [];
+        var app = firebase;
+        var db = firebase.firestore(app);
+        await db.collection("messages").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                let object={
+                    _id:doc.data()._id,
+                    createdAt:new Date(doc.data().createdAt.seconds*1000),
+                    text:doc.data().text,
+                    user:doc.data().user
+                }
+
+                messages.push(object);
+            });
+        });
+
+        return messages;
+    }
+
 
 }
 
