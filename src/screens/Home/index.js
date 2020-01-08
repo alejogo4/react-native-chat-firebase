@@ -27,10 +27,11 @@ class Home extends Component {
                         <Icon name="ios-arrow-back" />
                     </Button>
 
-                    <Button
-                    transparent
-                    onPress={() => navigate.navigate('Create')}
-                  ><Text>Hola</Text></Button>
+
+                    <Button onPress={() => this.props.navigation.navigate('Chat')}>
+                        <Text>Chat</Text>
+                    </Button>
+
                     {
                         this.props.loading ? 
                         <View>
